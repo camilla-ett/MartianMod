@@ -11,8 +11,15 @@ If you find any bugs, or have new ideas, please post issue or send Pull request.
 
 ## Links
 
+ - Nothing 
 
-## Memos
+## for Modding Beginers 
+
+ - I wrote some documents for Minecraft modding tutorials ( but Japanese only.)
+ - 本当に簡単なメモ程度ですが、mod開発のメモを[docs](./docs/)に残しています。よかったら参考にしてください。
+
+
+## Camilla-Ett's Memos
  - 今日　5月2日 - 5月7日 残５日
  - 目標
    - Minecraft フォーラムで配布する何かにはしたい。（beta 0.1ver
@@ -23,11 +30,3 @@ If you find any bugs, or have new ideas, please post issue or send Pull request.
    - 火星ディメンションの作成
      - バイオームの作成
 
-## Development Environment
-
- - Eclipse　をインストールします（割愛）
- - このリポジトリを、適当にどっかにクローンします（githubの使い方は割愛）
- - クローンが終わったら、コマンドプロンプト（もしくはPowerShell）でMartianModに移動します。
- - ``.\gradlew.bat setupDevWorkspace setupDecompWorkspace`` でforge のセットアップをします。
- - ``.\gradlew.bat`` eclipse で、Eclipse のプロジェクトファイルを生成します。
- - Eclipse を開き、作成した``.project``ファイルをインポートします。
