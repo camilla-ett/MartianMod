@@ -9,7 +9,7 @@
  - [開発環境の準備](./tutorials/environment.md)
  - [Proxy](./tutorials/proxy.md)
  - [WorldType](./tutorials/worldtype.md)
-
+ - [ChunkProvider](./tutorials/chunkprovider.md)
 
 ## Martian Mod APIs
 
