@@ -7,7 +7,8 @@
 基本的なことは1.8時代から変わっていないはずですが、微妙な差異があるかもしれません。
 
  - [開発環境の準備](./tutorials/environment.md)
- - [プロキシ](./tutorials/proxy.md)
+ - [Proxy](./tutorials/proxy.md)
+ - [WorldType](./tutorials/worldtype.md)
 
 
 ## Martian Mod APIs

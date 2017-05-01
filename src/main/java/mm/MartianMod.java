@@ -1,5 +1,6 @@
 package mm;
 
+import net.minecraft.world.WorldType;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.*;
 import net.minecraftforge.fml.common.event.*;
