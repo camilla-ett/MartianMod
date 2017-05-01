@@ -7,9 +7,12 @@ import mm.proxy.CommonProxy;
 
 @Mod(modid = MartianMod.MODID, version = MartianMod.VERSION)
 public class MartianMod {
-	public static final String MODID = "MartianMod";
+	public static final String MODID = "martianmod";
 	public static final String MODNAME = "Martian Mod";
-	public static final String VERSION = "beta 0.0.1";
+	public static final String VERSION = "beta-0.0.1";
+	
+	@Instance(MODID)
+	public static MartianMod instance;
 	
 	@SidedProxy(clientSide = "mm.proxy.ClientProxy", serverSide = "mm.proxy.ServerProxy", modId = MODID)
 	public static CommonProxy proxy;

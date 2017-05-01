@@ -1,0 +1,10 @@
+[{
+    "modid": "martianmod",
+    "name": "Martian Mod",
+    "description": "Martian Mod adds a dimention like Mars. If you find any bugs, or have new ideas, please post issue or send Pull request. thanks.",
+    "version": "beta-0.0.1",
+    "mcversion": "1.11.2",
+    "url": "littlemars.org/",
+    "authorList": ["Camilla Ett"],
+    "credits": "I'd like to thank my mother and father."
+}]
