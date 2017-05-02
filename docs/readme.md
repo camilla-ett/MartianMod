@@ -11,6 +11,10 @@
  - [WorldType](./tutorials/worldtype.md)
  - [ChunkProvider](./tutorials/chunkprovider.md)
 
+## Columns( for Japanese Only)
+
+ - [ダイアモンドスクエア法](./colums/diamond-square.md)（RTGに使われていると思われるアルゴリズム）
+
 ## Martian Mod APIs
 
 

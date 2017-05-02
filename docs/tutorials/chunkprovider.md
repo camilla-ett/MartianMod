@@ -96,3 +96,19 @@ public class MartinMarsChunkProvider implements IChunkGenerator {
 ```
 
 これで、何も生成されないvoid のWorldが生成される。重要なのは、provideChunk メソッド内の、ChunkPrimary が、具体的にどのブロックを置くのか決定していくらしい。
+
+## 具体的にどのブロックを配置するか決定していく。
+
+大体以下の手順で生成していく。
+
+1. 大まかなブロックを配置していく
+  - [RTGのここ](https://github.com/Team-RTG/Realistic-Terrain-Generation/blob/1.11.2-dev/src/main/java/rtg/world/gen/ChunkProviderRTG.java#L416)あたりが参考になるだろうか。石、水、空気を配置する。
+  - 特にRTGが１番顕著だけど、バイオームに合わせてノイズを調整している。
+
+2. すでに設置してある石を、バイオームに合わせて置換していく。（砂漠なら砂、平原なら草ブロックなど）
+
+3. 岩盤を設置する。
+
+4. 構造物を生成する。
+ - 洞窟やダンジョン、村など。遠くにこだわりがなければデフォルトの生成をさせればいい。
+

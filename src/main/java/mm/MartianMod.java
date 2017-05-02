@@ -4,6 +4,7 @@ import net.minecraft.world.WorldType;
 import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.Mod.*;
 import net.minecraftforge.fml.common.event.*;
+import mm.io.MarsTopologyLoader;
 import mm.proxy.CommonProxy;
 
 @Mod(modid = MartianMod.MODID, version = MartianMod.VERSION)
@@ -29,6 +30,9 @@ public class MartianMod {
 	{
 		// some example code
 		proxy.init(event);
+
+		// test
+		MarsTopologyLoader mtl = MarsTopologyLoader.getInstance();
 	}
 	
 	@EventHandler
