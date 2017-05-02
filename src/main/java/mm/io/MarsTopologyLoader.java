@@ -6,12 +6,14 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 
 import mm.MartianMod;
+import mm.UtilMM;
+import mm.ConfigMM;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 
 public class MarsTopologyLoader{
 	
-	private final static String toporogyFileName = "marsbump.jpg";
+	private final static String toporogyFileName = "mars_mola_bumpmap_8192x4096.jpg";
 	private static MarsTopologyLoader instance = new MarsTopologyLoader();
 	public int imgWidth;
 	public int imgHeight;
@@ -44,26 +46,6 @@ public class MarsTopologyLoader{
 		return new ResourceLocation(MartianMod.MODID+":"+fileName);
 	}
 	
-	private static double[] MinecraftWorldToLatLng(int x, int z)
-	{
-		double d = Math.sqrt(x*x + z*z);
-		double t = Math.atan2(z, x);
-		double R = 1250;
-		double lat = t / (2 * Math.PI) * Math.sin(d/(R*Math.PI)) * 90;
-		double lng = d / (2 * Math.PI * R) * 360.0;
-		double ret[] = {lat, lng};
-		return ret;
-	}
-	
-	private static double[] LatLngToEuclid(double lat, double lng)
-	{
-		double u = instance.imgWidth * Math.cos(lat * 2 * Math.PI / 360.0) * lng / 360.0 + instance.imgWidth/2;
-		double v = instance.imgHeight * lat / 180.0 + instance.imgHeight / 2;
-		
-		double ret[] = {u, v};
-		return ret;
-	}
-	
 	private static int getAltitude(int u, int v)
 	{
 		int pos = (v * instance.pixelLength * instance.imgWidth) + (u * instance.pixelLength);
@@ -71,14 +53,41 @@ public class MarsTopologyLoader{
 		return gray;
 	}
 
-	static int counter = 0;
+	public static int getElevation(final int x, final int z) {
+		final int scale = ConfigMM.MartianMarsScale;
+		
+		int lx = x / scale;
+		int lz = Math.abs(z)/scale;
+		if (lx < 0) {
+			int i = (lx / instance.imgWidth);
+			lx = lx + (i+1) * instance.imgWidth;
+		}
+		if ((lz / instance.imgHeight) % 2 == 0 ) {
+			lz = instance.imgHeight - 1 - lz;
+		}
 	
-	public static int getElevation(int x, int z) {
-		counter++;
-		double tmp[] = MinecraftWorldToLatLng(x, z);
-		if(counter % 256 == 0) System.out.printf("(%d, %d) -> (%f, %f)\n", x, z, tmp[0], tmp[1]);
-		tmp = LatLngToEuclid(tmp[0], tmp[1]);
-		return getAltitude((int)tmp[0], (int)tmp[1]);
+		if(scale == 1) {
+			return getAltitude(lx, lz);
+		} else {
+			UtilMM.Pos2D pos[] = {
+				new UtilMM.Pos2D(lx, lz),
+				new UtilMM.Pos2D(lx+1 == instance.imgWidth ? lx : lx + 1, lz),
+				new UtilMM.Pos2D(lx, lz+1 == instance.imgHeight ? lz : lz + 1),
+				new UtilMM.Pos2D(lx+1 == instance.imgWidth ? lx : lx + 1, lz+1 == instance.imgHeight ? lz : lz + 1)
+			};
+			int altitudes[] = {
+				getAltitude(pos[0].x, pos[0].z),
+				getAltitude(pos[1].x, pos[1].z),
+				getAltitude(pos[2].x, pos[2].z),
+				getAltitude(pos[3].x, pos[3].z)
+			};
+			double centeralts[] = {
+				(double)(altitudes[1] - altitudes[0]) / (double) (scale) * (double) (x >= 0 ? x % scale : x % scale + scale - 1) + (double) altitudes[0],
+				(double)(altitudes[3] - altitudes[2]) / (double) (scale) * (double) (x >= 0 ? x % scale : x % scale + scale - 1) + (double) altitudes[2]
+			};
+			
+			return (int)((centeralts[0] - centeralts[1]) / (double) (scale) * (double) (Math.abs(z) % scale) + centeralts[1]);
+		}
 	}
 	
 	public static MarsTopologyLoader getInstance()
